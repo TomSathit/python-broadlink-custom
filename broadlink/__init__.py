@@ -463,15 +463,15 @@ class a1(device):
         else:
             data['light'] = 'unknown'
         if air_quality == 0:
-            data['airQuality'] = 'excellent'
+            data['air_quality'] = 'excellent'
         elif air_quality == 1:
-            data['airQuality'] = 'good'
+            data['air_quality'] = 'good'
         elif air_quality == 2:
-            data['airQuality'] = 'normal'
+            data['air_quality'] = 'normal'
         elif air_quality == 3:
-            data['airQuality'] = 'bad'
+            data['air_quality'] = 'bad'
         else:
-            data['airQuality'] = 'unknown'
+            data['air_quality'] = 'unknown'
         if noise == 0:
             data['noise'] = 'quiet'
         elif noise == 1:
@@ -495,13 +495,13 @@ class a1(device):
             data['temperature'] = (payload[0x4] * 10 + payload[0x5]) / 10.0
             data['humidity'] = (payload[0x6] * 10 + payload[0x7]) / 10.0
             data['light'] = payload[0x8]
-            data['airQuality'] = payload[0x0a]
+            data['air_quality'] = payload[0x0a]
             data['noise'] = payload[0xc]
         else:
             data['temperature'] = (ord(payload[0x4]) * 10 + ord(payload[0x5])) / 10.0
             data['humidity'] = (ord(payload[0x6]) * 10 + ord(payload[0x7])) / 10.0
             data['light'] = ord(payload[0x8])
-            data['airQuality'] = ord(payload[0x0a])
+            data['air_quality'] = ord(payload[0x0a])
             data['noise'] = ord(payload[0xc])
         return data
 
@@ -646,7 +646,7 @@ class hysen(device):
 
     # Get full status (including timer schedule)
     def get_full_status(self):
-        payload = self.send_request(bytearray([0x01, 0x03, 0x00, 0x00, 0x00, 0x16]))
+        payload = selfairQuality.send_request(bytearray([0x01, 0x03, 0x00, 0x00, 0x00, 0x16]))
         data = {}
         data['remote_lock'] = payload[3] & 1
         data['power'] = payload[4] & 1
